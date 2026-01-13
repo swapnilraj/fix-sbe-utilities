@@ -100,10 +100,26 @@ public class SbeSchemaValidator {
     return eventListener;
   }
   
-  /*public static void main(String[] args) {
-    // TODO Auto-generated method stub
-
-  }*/
+  public static void main(String[] args) {
+    if (args.length < 2 || args.length > 3) {
+        System.err.println("Usage: SbeSchemaValidator <sbe-xml-file> <sbe-xsd-file> [event-log-file]");
+        System.exit(1);
+    }
+    
+    String inputFile = args[0];
+    String schemaFile = args[1];
+    String eventFile = args.length > 2 ? args[2] : null;
+    
+    SbeSchemaValidator validator = SbeSchemaValidator.builder()
+        .inputFile(inputFile)
+        .schemaFile(schemaFile)
+        .eventLog(eventFile)
+        .build();
+        
+    if (!validator.validate()) {
+        System.exit(1);
+    }
+  }
   
   private int errors = 0;
   private final String eventFile;
@@ -186,6 +202,9 @@ public class SbeSchemaValidator {
 
     // load a WXS schema, represented by a Schema instance
     final URL resourceUrl = this.getClass().getClassLoader().getResource(schemaFilename);
+    if (resourceUrl == null) {
+        throw new IOException("Schema file not found in classpath: " + schemaFilename);
+    }
     final String path = Objects.requireNonNull(resourceUrl).getPath();
     final String parentPath = path.substring(0, path.lastIndexOf('/'));
     final URL baseUrl = new URL(resourceUrl.getProtocol(), null, parentPath);
