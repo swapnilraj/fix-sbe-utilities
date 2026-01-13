@@ -39,24 +39,24 @@ xmlns:sbe="http://fixprotocol.io/2017/sbe" exclude-result-prefixes="fn xs">
 				</xsl:when>
 				<xsl:when test="@name='Length'">
 					<fixr:mappedDatatype standard="SBE">
-						<sbe:type name="length" primitiveType="uint32"/>
+						<sbe:type name="Length" primitiveType="uint32"/>
 					</fixr:mappedDatatype>
 				</xsl:when>
 				<xsl:when test="@name='TagNum'">
 					<fixr:mappedDatatype standard="SBE">
-						<sbe:type name="tagNum" primitiveType="uint16"/>
+						<sbe:type name="TagNum" primitiveType="uint16"/>
 					</fixr:mappedDatatype>
 				</xsl:when>
 				<xsl:when test="@name='SeqNum'">
 					<fixr:mappedDatatype standard="SBE">
-						<sbe:type name="seqNum" primitiveType="uint32"/>
+						<sbe:type name="SeqNum" primitiveType="uint32"/>
 					</fixr:mappedDatatype>
 				</xsl:when>
 				<xsl:when test="@name='NumInGroup'">
 				</xsl:when>
 				<xsl:when test="@name='DayOfMonth'">
 					<fixr:mappedDatatype standard="SBE" minInclusive="1" maxInclusive="31">
-						<sbe:type name="dayOfMonth" primitiveType="uint8"/>
+						<sbe:type name="DayOfMonth" primitiveType="uint8"/>
 					</fixr:mappedDatatype>
 				</xsl:when>
 				<xsl:when test="@name='float'">
@@ -66,7 +66,7 @@ xmlns:sbe="http://fixprotocol.io/2017/sbe" exclude-result-prefixes="fn xs">
 				</xsl:when>
 				<xsl:when test="@name='Qty'">
 					<fixr:mappedDatatype standard="SBE">
-						<sbe:composite name="qty">
+						<sbe:composite name="Qty">
 							<sbe:type name="mantissa" primitiveType="int32"/>
 							<sbe:type name="exponent" presence="constant" primitiveType="int8">0</sbe:type>
 						</sbe:composite>
@@ -74,7 +74,7 @@ xmlns:sbe="http://fixprotocol.io/2017/sbe" exclude-result-prefixes="fn xs">
 				</xsl:when>
 				<xsl:when test="@name='Price'">
 					<fixr:mappedDatatype standard="SBE">
-						<sbe:composite name="price">
+						<sbe:composite name="Price">
 							<sbe:type name="mantissa" presence="optional" primitiveType="int64"/>
 							<sbe:type name="exponent" presence="constant" primitiveType="int8">-3</sbe:type>
 						</sbe:composite>
@@ -82,7 +82,7 @@ xmlns:sbe="http://fixprotocol.io/2017/sbe" exclude-result-prefixes="fn xs">
 				</xsl:when>
 				<xsl:when test="@name='PriceOffset'">
 					<fixr:mappedDatatype standard="SBE">
-						<sbe:composite name="priceOffset">
+						<sbe:composite name="PriceOffset">
 							<sbe:type name="mantissa" presence="optional" primitiveType="int64"/>
 							<sbe:type name="exponent" presence="constant" primitiveType="int8">-3</sbe:type>
 						</sbe:composite>
@@ -90,7 +90,7 @@ xmlns:sbe="http://fixprotocol.io/2017/sbe" exclude-result-prefixes="fn xs">
 				</xsl:when>
 				<xsl:when test="@name='Amt'">
 					<fixr:mappedDatatype standard="SBE">
-						<sbe:composite name="amt">
+						<sbe:composite name="Amt">
 							<sbe:type name="mantissa" presence="optional" primitiveType="int64"/>
 							<sbe:type name="exponent" presence="constant" primitiveType="int8">-3</sbe:type>
 						</sbe:composite>
@@ -98,7 +98,7 @@ xmlns:sbe="http://fixprotocol.io/2017/sbe" exclude-result-prefixes="fn xs">
 				</xsl:when>
 				<xsl:when test="@name='Percentage'">
 					<fixr:mappedDatatype standard="SBE">
-						<sbe:composite name="percentage">
+						<sbe:composite name="Percentage">
 							<sbe:type name="mantissa" presence="optional" primitiveType="int32"/>
 							<sbe:type name="exponent" presence="constant" primitiveType="int8">2</sbe:type>
 						</sbe:composite>
@@ -111,7 +111,7 @@ xmlns:sbe="http://fixprotocol.io/2017/sbe" exclude-result-prefixes="fn xs">
 				</xsl:when>
 				<xsl:when test="@name='Boolean'">
 					<fixr:mappedDatatype standard="SBE">
-						<sbe:enum name="boolean" encodingType="uint8">
+						<sbe:enum name="Boolean" encodingType="uint8">
 							<sbe:validValue name="false">0</sbe:validValue>
 							<sbe:validValue name="true">1</sbe:validValue>
 						</sbe:enum>
@@ -119,12 +119,12 @@ xmlns:sbe="http://fixprotocol.io/2017/sbe" exclude-result-prefixes="fn xs">
 				</xsl:when>
 				<xsl:when test="@name='String'">
 					<fixr:mappedDatatype standard="SBE">
-						<sbe:type name="country" length="16" primitiveType="char"/>
+						<sbe:type name="String" length="16" primitiveType="char"/>
 					</fixr:mappedDatatype>
 				</xsl:when>
 				<xsl:when test="@name='MultipleCharValue'">
 					<fixr:mappedDatatype standard="SBE" base="string" builtin="0">
-						<sbe:composite name="multipleCharValue">
+						<sbe:composite name="MultipleCharValue">
 							<sbe:type name="length" primitiveType="uint16"/>
 							<sbe:type name="varData" length="0" primitiveType="uint8"/>
 						</sbe:composite>
@@ -132,7 +132,7 @@ xmlns:sbe="http://fixprotocol.io/2017/sbe" exclude-result-prefixes="fn xs">
 				</xsl:when>
 				<xsl:when test="@name='MultipleStringValue'">
 					<fixr:mappedDatatype standard="SBE" base="string" builtin="0">
-						<sbe:composite name="multipleStringValue">
+						<sbe:composite name="MultipleStringValue">
 							<sbe:type name="length" primitiveType="uint16"/>
 							<sbe:type name="varData" length="0" primitiveType="uint8"/>
 						</sbe:composite>
@@ -140,22 +140,22 @@ xmlns:sbe="http://fixprotocol.io/2017/sbe" exclude-result-prefixes="fn xs">
 				</xsl:when>
 				<xsl:when test="@name='Country'">
 					<fixr:mappedDatatype standard="SBE">
-						<sbe:type name="country" length="2" primitiveType="char"/>
+						<sbe:type name="Country" length="2" primitiveType="char"/>
 					</fixr:mappedDatatype>
 				</xsl:when>
 				<xsl:when test="@name='Currency'">
 					<fixr:mappedDatatype standard="SBE">
-						<sbe:type name="country" length="3" primitiveType="char"/>
+						<sbe:type name="Currency" length="3" primitiveType="char"/>
 					</fixr:mappedDatatype>
 				</xsl:when>
 				<xsl:when test="@name='Exchange'">
 					<fixr:mappedDatatype standard="SBE">
-						<sbe:type name="country" length="4" primitiveType="char"/>
+						<sbe:type name="Exchange" length="4" primitiveType="char"/>
 					</fixr:mappedDatatype>
 				</xsl:when>
 				<xsl:when test="@name='MonthYear'">
 					<fixr:mappedDatatype standard="SBE">
-						<sbe:composite name="monthYear">
+						<sbe:composite name="MonthYear">
 							<sbe:type name="year" primitiveType="uint16"/>
 							<sbe:type name="month" primitiveType="uint8"/>
 							<sbe:type name="day" primitiveType="uint8"/>
@@ -165,7 +165,7 @@ xmlns:sbe="http://fixprotocol.io/2017/sbe" exclude-result-prefixes="fn xs">
 				</xsl:when>
 				<xsl:when test="@name='UTCTimestamp'">
 					<fixr:mappedDatatype standard="SBE" base="string" parameter='"format": "date-time"' builtin="1">
-						<sbe:composite name="utcTimestamp">
+						<sbe:composite name="UTCTimestamp">
 							<sbe:type name="time" primitiveType="uint64"/>
 							<sbe:type name="unit" primitiveType="uint8" presence="constant" valueRef="TimeUnit.nanosecond"/>
 						</sbe:composite>
@@ -179,7 +179,7 @@ xmlns:sbe="http://fixprotocol.io/2017/sbe" exclude-result-prefixes="fn xs">
 				</xsl:when>
 				<xsl:when test="@name='UTCTimeOnly'">
 					<fixr:mappedDatatype standard="SBE" base="string" builtin="0">
-						<sbe:composite name="utcTimeOnly">
+						<sbe:composite name="UTCTimeOnly">
 							<sbe:type name="time" primitiveType="uint64"/>
 							<sbe:type name="unit" primitiveType="uint8" presence="constant" valueRef="TimeUnit.nanosecond"/>
 						</sbe:composite>
@@ -187,17 +187,17 @@ xmlns:sbe="http://fixprotocol.io/2017/sbe" exclude-result-prefixes="fn xs">
 				</xsl:when>
 				<xsl:when test="@name='UTCDateOnly'">
 					<fixr:mappedDatatype standard="SBE">
-						<sbe:type name="utcDateOnly" primitiveType="uint16"/>
+						<sbe:type name="UTCDateOnly" primitiveType="uint16"/>
 					</fixr:mappedDatatype>
 				</xsl:when>
 				<xsl:when test="@name='LocalMktDate'">
 					<fixr:mappedDatatype standard="SBE">
-						<sbe:type name="localMktDate" primitiveType="uint16"/>
+						<sbe:type name="LocalMktDate" primitiveType="uint16"/>
 					</fixr:mappedDatatype>
 				</xsl:when>
 				<xsl:when test="@name='TZTimeOnly'">
 					<fixr:mappedDatatype standard="SBE" base="string" builtin="0">
-						<sbe:composite name="tzTimeOnly">
+						<sbe:composite name="TZTimeOnly">
 							<sbe:type name="time" primitiveType="uint64"/>
 							<sbe:type name="unit" primitiveType="uint8"/>
 							<sbe:type name="timezoneHour" primitiveType="int8" minValue="-12" maxValue="14"/>
@@ -207,7 +207,7 @@ xmlns:sbe="http://fixprotocol.io/2017/sbe" exclude-result-prefixes="fn xs">
 				</xsl:when>
 				<xsl:when test="@name='TZTimestamp'">
 					<fixr:mappedDatatype standard="SBE" base="string" parameter='"format": "date-time"' builtin="1">
-						<sbe:composite name="tzTimestamp">
+						<sbe:composite name="TZTimestamp">
 							<sbe:type name="time" primitiveType="uint64"/>
 							<sbe:type name="unit" primitiveType="uint8"/>
 							<sbe:type name="timezoneHour" primitiveType="int8" minValue="-12" maxValue="14"/>
@@ -233,7 +233,7 @@ xmlns:sbe="http://fixprotocol.io/2017/sbe" exclude-result-prefixes="fn xs">
 				</xsl:when>
 				<xsl:when test="@name='XMLData'">
 					<fixr:mappedDatatype standard="SBE" base="string" builtin="0">
-						<sbe:composite name="xmlData">
+						<sbe:composite name="XMLData">
 							<sbe:type name="length" primitiveType="uint16"/>
 							<sbe:type name="varData" length="0" primitiveType="uint8"/>
 						</sbe:composite>
@@ -241,12 +241,12 @@ xmlns:sbe="http://fixprotocol.io/2017/sbe" exclude-result-prefixes="fn xs">
 				</xsl:when>
 				<xsl:when test="@name='Language'">
 					<fixr:mappedDatatype standard="SBE">
-						<sbe:type name="language" length="2" primitiveType="char"/>
+						<sbe:type name="Language" length="2" primitiveType="char"/>
 					</fixr:mappedDatatype>
 				</xsl:when>
 				<xsl:when test="@name='LocalMktTime'">
 					<fixr:mappedDatatype standard="SBE" base="string" builtin="0">
-						<sbe:composite name="localMktTime">
+						<sbe:composite name="LocalMktTime">
 							<sbe:type name="time" primitiveType="uint64"/>
 							<sbe:type name="unit" primitiveType="uint8" presence="constant" valueRef="TimeUnit.nanosecond"/>
 						</sbe:composite>

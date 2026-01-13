@@ -38,11 +38,22 @@
 		<xsl:apply-templates select="child::*" mode="strip-namespace"/>
 	</xsl:template>
 	<xsl:template match="fixr:codeSet">
-		<enum>
-			<xsl:attribute name="name"><xsl:value-of select="@name"/></xsl:attribute>
-			<xsl:attribute name="encodingType"><xsl:value-of select="@type"/></xsl:attribute>
-			<xsl:apply-templates select="fixr:code"/>
-		</enum>
+		<xsl:variable name="maxLen" select="max(for $c in fixr:code return string-length($c/@value))"/>
+		<xsl:choose>
+			<xsl:when test="@type='MultipleValueString' or @type='MultipleCharValue'">
+				<type name="{@name}" primitiveType="char" length="64"/>
+			</xsl:when>
+			<xsl:when test="$maxLen &gt; 1">
+				<type name="{@name}" primitiveType="char" length="{$maxLen}"/>
+			</xsl:when>
+			<xsl:otherwise>
+				<enum>
+					<xsl:attribute name="name"><xsl:value-of select="@name"/></xsl:attribute>
+					<xsl:attribute name="encodingType">char</xsl:attribute>
+					<xsl:apply-templates select="fixr:code"/>
+				</enum>
+			</xsl:otherwise>
+		</xsl:choose>
 	</xsl:template>
 	<xsl:template match="fixr:code">
 		<validValue>
