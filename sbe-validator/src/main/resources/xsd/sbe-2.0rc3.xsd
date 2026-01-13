@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:sbe="http://fixprotocol.io/2017/sbe" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://fixprotocol.io/2017/sbe" elementFormDefault="qualified" version="2.0RC3">
+<xs:schema xmlns:sbe="http://fixprotocol.io/2017/sbe" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://fixprotocol.io/2017/sbe" elementFormDefault="unqualified" version="2.0RC3">
 	<xs:annotation>
 		<xs:documentation>
 			Message schema for FIX Simple Binary Encoding

@@ -29,7 +29,7 @@
 		</sbe:messageSchema>
 	</xsl:template>
 	<xsl:template match="fixr:mappedDatatype">
-		<xsl:copy-of select="child::*"/>
+		<xsl:apply-templates select="child::*" mode="strip-namespace"/>
 	</xsl:template>
 	<xsl:template match="fixr:codeSet">
 		<enum>
@@ -45,12 +45,12 @@
 		</validValue>
 	</xsl:template>
 	<xsl:template match="fixr:message">
-		<message>
-			<xsl:attribute name="name"><xsl:value-of select="@name"/><xsl:value-of select="@scenario"/></xsl:attribute>
+		<sbe:message>
+			<xsl:attribute name="name"><xsl:value-of select="substring(concat(@name, @scenario), 1, 64)"/></xsl:attribute>
 			<xsl:attribute name="id"><xsl:value-of select="@id"/></xsl:attribute>
 			<xsl:attribute name="semanticType"><xsl:value-of select="@msgType"/></xsl:attribute>
 			<xsl:apply-templates select="fixr:structure"/>
-		</message>
+		</sbe:message>
 	</xsl:template>
 	<xsl:template match="fixr:structure">
 		<xsl:apply-templates mode="field"/>
@@ -66,7 +66,7 @@
 			<xsl:otherwise>
 			<field>
 				<xsl:attribute name="id"><xsl:value-of select="@id"/></xsl:attribute>
-				<xsl:attribute name="name"><xsl:value-of select="$field/@name"/></xsl:attribute>
+				<xsl:attribute name="name"><xsl:value-of select="substring($field/@name, 1, 64)"/></xsl:attribute>
 				<xsl:attribute name="type"><xsl:value-of select="$field/@type"/></xsl:attribute>
 			</field>
 			</xsl:otherwise>
@@ -80,7 +80,7 @@
 			<xsl:when test="$field/@type='data' or $field/@type='XMLData'">
 			<data>
 				<xsl:attribute name="id"><xsl:value-of select="@id"/></xsl:attribute>
-				<xsl:attribute name="name"><xsl:value-of select="$field/@name"/></xsl:attribute>
+				<xsl:attribute name="name"><xsl:value-of select="substring($field/@name, 1, 64)"/></xsl:attribute>
 				<xsl:attribute name="type"><xsl:value-of select="$field/@type"/></xsl:attribute>
 			</data>
 			</xsl:when>
@@ -98,7 +98,7 @@
 		<xsl:variable name="group" select="//fixr:group[@id=fn:current()/@id]"/>
 		<group>
 			<xsl:attribute name="id"><xsl:value-of select="@id"/></xsl:attribute>
-			<xsl:attribute name="name"><xsl:value-of select="$group/@name"/></xsl:attribute>
+			<xsl:attribute name="name"><xsl:value-of select="substring($group/@name, 1, 64)"/></xsl:attribute>
 			<xsl:attribute name="dimensionType">groupSizeEncoding</xsl:attribute>
 			<xsl:apply-templates select="$group" mode="field"/>
 			<xsl:apply-templates select="$group" mode="group"/>
@@ -115,4 +115,13 @@
 	</xsl:template>
 	<xsl:template match="fixr:annotation" mode="#all"/>
 	<xsl:template match="text()|@*" mode="#all"/>
+	<xsl:template match="*" mode="strip-namespace" priority="1">
+		<xsl:element name="{local-name()}">
+			<xsl:copy-of select="@*"/>
+			<xsl:apply-templates select="node()" mode="strip-namespace"/>
+		</xsl:element>
+	</xsl:template>
+	<xsl:template match="text()|comment()|processing-instruction()" mode="strip-namespace" priority="1">
+		<xsl:copy/>
+	</xsl:template>
 </xsl:stylesheet>
